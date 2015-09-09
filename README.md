@@ -1,6 +1,8 @@
 # GitCheatSheet
 ##Git Cheat-Sheet For The Command Line##
 
+####Git Commands:####
+
 To see a summary of what will be pushed:
 
 	git diff --stat [remote]/[branch]
@@ -203,7 +205,23 @@ To clone a project with submodules:
 	git submodule init
 	git submodule update
 
-Aliases:
+Rebasing (Apply all the changes from one branch to another)
+
+**Note: Do not rebase commits that have been pushed to a public repo!!**
+
+To rebase the commits from newbranch into master:
+
+	git checkout newbranch
+	git rebase master
+	git checkout master
+	git merge newbranch
+
+To undo a rebase:
+
+	git reset --hard ORIG_HEAD
+
+
+####Aliases:####
 
 	unstage = reset HEAD --
 	undo = checkout --
