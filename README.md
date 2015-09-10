@@ -1,7 +1,55 @@
 # GitCheatSheet
 ##Git Cheat-Sheet For The Command Line##
 
-####Git Commands:####
+
+####Working With Branches####
+
+To list all branches:
+
+	git branch -a
+
+To switch to a branch:
+
+	git branch [your branch]
+
+To create a new branch and switch to it:
+
+	git checkout -b [new branch]
+
+To delete a local branch (after it has been merged):
+
+	git branch -d [your branch]
+
+To list which branches have been merged into the current branch:
+
+	git branch --merged
+
+To list which branches have not been merged into the current branch:
+
+	git branch --no-merged
+
+To see which branches are tracking which remotes:
+
+	git branch -vv
+
+To change the remote that a branch is tracking:
+
+	git branch [branch_name] -u [new_remote]/[branch_name]
+
+To re-create a deleted branch (where sha1=last commit in the branch):
+
+	git checkout -b [branch name] [sha1]
+
+
+####Using Diff####
+
+To see the differences between two branches:
+
+	git diff [branch1]..[branch2]
+
+To see the differences between two commits:
+
+	git diff [hash1] [hash2]
 
 To see a summary of what will be pushed:
 
@@ -11,47 +59,24 @@ To see a full diff of what will be pushed
 
 	git diff [remote]/[branch]
 
-To see log of abbreviated stats for each commit:
+To see the differences between local (workspace) and fetched/remote branch:
 
-	git log --stat
+	git diff [branch] [remote]/[branch]
 
-To see the log of diffs introduced in the last 2 commits:
+To see the list of changed files between local (workspace) and fetched/remote branch:
 
-	git log -p -2
+	git diff --name-only [branch] [remote]/[branch]
 
-To see the log as an ascii graph with branch and merge history with abbreviated hash and the subject:
+To see the difference of a specific file between local (workspace) and fetched/remote branch:
 
-	git log --pretty=format:"%h %s" --graph
+	git diff [branch] [remote]/[branch] -- [filepath]
 
-To modify a commit with a new message or add a file:
 
-	git [changes]
-	git commit --amend
+####Committing####
 
-To unstage a file:
+To commit all changes with a commit message:
 
-	git reset HEAD file
-
-To reset all changes to all files:
-
-	git reset --hard
-	
-To restore everything back to the way it was prior to the last commit, we need to reset to the commit before HEAD:
-
-	git reset --soft HEAD^     # use --soft if you want to keep your changes
-	git reset --hard HEAD^     # use --hard if you don't care about keeping the changes you made
-	
-To move current changes in to the stash:
-
-	git stash
-
-To put the changes back from the stash:
-
-	git stash apply
-
-To discard changes to a file in the working directory:
-
-	git checkout -- [file]
+	git commit -am "Commit message"
 
 To checkout a previous commit into the working directory:
 
@@ -65,49 +90,21 @@ To checkout a previous commit into a new branch:
 
 	git checkout -b [new branch] [revision]
 
-To see information about remotes (servers):
+To modify a commit with a new message or add a file:
 
-	git remote -v
+	git [changes]
+	git commit --amend
 
-To see detailed information about a remote:
+To move current changes in to the stash:
 
-	git remote show [remote]
+	git stash
 
-To add the upstream repo to your forked/cloned repo:
+To put the changes back from the stash:
 
-	git remote add upstream [upstream url]
+	git stash apply
 
-To clone a repo into a custom folder:
 
-	git clone [repo_url] [folder]
-
-To fetch data from the server (branches, etc) without merging it in:
-
-	git fetch [remote]
-
-To list a tags in a repo:
-
-	git tag
-	
-To create a tag:
-
-	git tag -a [tagname] -m "description"
-	
-To create a tag after you've moved past a commit:
-
-	git tag -a v1.2 "version 1.2" [hash]
-
-To push a tag to the remote:
-
-	git push [remote] [tagname]
-
-To list all branches:
-
-	git branch -a
-	
-To create a new branch and switch to it:
-
-	git checkout -b [newbranch]
+####Merging####
 
 To fix a merge conflict by overwriting a file altogether:
 
@@ -124,75 +121,115 @@ To merge a branch back into master:
 	# commit changes to newbranch
 	git checkout master
 	git merge newbranch
-	
-To delete a local branch (after it has been merged):
 
-	git branch -d [new branch]
-	
-To list which branches have been merged into the current branch:
 
-	git branch --merged
+####Viewing Commit Logs####
 
-To list which branches have not been merged into the current branch:
+To see log of abbreviated stats for each commit:
 
-	git branch --no-merged
+	git log --stat
+
+To see the log of diffs introduced in the last 2 commits:
+
+	git log -p -2
+
+To see the log as an ascii graph with branch and merge history with abbreviated hash and the subject:
+
+	git log --pretty=format:"%h %s" --graph
+
+
+####Undoing Changes####
+
+To unstage a file:
+
+	git reset HEAD file
+
+To discard changes to a file in the working directory:
+
+	git checkout -- [file]
+
+To reset all changes to all files:
+
+	git reset --hard
+
+To restore everything back to the way it was prior to the last commit:
+
+	git reset --soft HEAD^     # use --soft if you want to keep your changes
+	git reset --hard HEAD^     # use --hard if you don't care about keeping the changes you made
+
+
+####Working With Remotes####
+
+To clone a repo into a custom folder:
+
+	git clone [repo_url] [folder]
+
+To fetch data from the server (branches, etc) without merging it in to the local workspace:
+
+	git fetch [remote]
+
+To fetch data from a remote and merge it in to the local workspace:
+
+	git pull [remote]
+
+To see information about remotes (servers):
+
+	git remote -v
+
+To see detailed information about a remote:
+
+	git remote show [remote]
+
+To add another (e.g., upstream) repo to your forked/cloned repo:
+
+	git remote add upstream [upstream url]
 
 To push a branch to the remote:
 
 	git push [remote] [newbranch]
-	
+
 To delete a remote branch from remote:
 
 	git push [remote] :[newbranch]
 
-To clean-up / refresh your references to remote branches:
+To clean-up / refresh your references/tracking to remote branches:
 
 	git remote prune [remote]
 
-To re-create a deleted branch (where sha1=last commit in the branch):
-
-	git checkout -b [branchname] [sha1]
-
-To see the differences between two branches:
-
-	git diff [branch1]..[branch2]
-
-To see the differences between two commits:
-
-	git diff [hash1] [hash2]
-
-To see the differences between local (workspace) and fetched/remote branch:
-
-	git diff [branch] [remote]/[branch]
-
-To see the list of changed files between local (workspace) and fetched/remote branch:
-
-	git diff --name-only [branch] [remote]/[branch]
-
-To see the difference of a specific file between local (workspace) and fetched/remote branch:
-
-	git diff [branch] [remote]/[branch] -- [filepath]
-
-To update/sync my fork with upstream:
+To update/sync a fork with the upstream repo:
 
 	git fetch [upstream]
-	git co [branch]
+	git checkout [branch]
 	git merge [upstream]/[branch]
 	git push [origin] [branch]
-
-To see which branches are tracking which remotes:
-
-	git branch -vv
-
-To change the remote that a branch is tracking:
-
-	git branch [branch_name] -u [new_remote]/[branch_name]
 
 To 'import' a branch from upstream into a fork:
 
 	git fetch [upstream]
-	git co -b [branch] [upstream]/[branch]
-	git push -u [origin] [branch]
+	git checkout -b [branch] [upstream]/[branch]
+	git push -u [origin] [branch] # -u is optional - to update the branch tracking to the [origin] remote
+
+
+####Tags####
+
+To list a tags in a repo:
+
+	git tag
+
+To create a tag:
+
+	git tag -a [tagname] -m "description"
+
+To create a tag after you've moved past a commit:
+
+	git tag -a v1.2 "version 1.2" [hash]
+
+To push a tag to the remote:
+
+	git push [remote] [tagname]
+
+
+####Using Submodules####
 
 To add an existing repo as a submodule:
 
@@ -205,7 +242,9 @@ To clone a project with submodules:
 	git submodule init
 	git submodule update
 
-Rebasing (Apply all the changes from one branch to another)
+
+####Rebasing####
+(Apply all the changes from one branch to another)
 
 **Note: Do not rebase commits that have been pushed to a public repo!!**
 
@@ -221,7 +260,7 @@ To undo a rebase:
 	git reset --hard ORIG_HEAD
 
 
-####Aliases:####
+####Aliases####
 
 	unstage = reset HEAD --
 	undo = checkout --
