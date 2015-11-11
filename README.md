@@ -243,6 +243,17 @@ To clone a project with submodules:
 	git submodule update
 
 
+####Using Subtree####
+
+To add a git subtree:
+
+	git subtree add --prefix destination_folder repo_url branch --squash
+
+To pull a subtree:
+
+	git subtree pull --prefix destination_folder repo_url branch --squash
+
+
 ####Rebasing####
 (Apply all the changes from one branch to another)
 
@@ -278,3 +289,5 @@ To undo a rebase:
 	lg = log --stat
 	lp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	oldest-ancestor = !zsh -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
+	sta = "!f() { git subtree add --prefix $2 $1 master --squash; }; f"
+	stp = "!f() { git subtree pull --prefix $2 $1 master --squash; }; f"
