@@ -291,4 +291,3 @@ To undo a rebase:
 	oldest-ancestor = !zsh -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 	sta = "!f() { git subtree add --prefix $2 $1 master --squash; }; f"
 	stp = "!f() { git subtree pull --prefix $2 $1 master --squash; }; f"
-
