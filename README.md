@@ -333,10 +333,12 @@ To push commits back to SVN:
 	git svn dcommit
 
 Git SVN setup:
+
 1. Clone repo
 2. Port the ignore file
 
 Git SVN workflow:
+
 1. Checkout master (trunk)
 2. Fetch/rebase updates from SVN
 3. Create new local branch and switch to it
