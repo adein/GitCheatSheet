@@ -333,23 +333,23 @@ To push commits back to SVN:
 	git svn dcommit
 
 Git SVN setup:
-	1. Clone repo
-	2. Port the ignore file
+1. Clone repo
+2. Port the ignore file
 
 Git SVN workflow:
-	1. Checkout master (trunk)
-	2. Fetch/rebase updates from SVN
-	3. Create new local branch and switch to it
-	4. Make changes and commits as normal for git (git add, git commit)
-	5. Merge or rebase local branch with/onto master (trunk). Either:
-		 a. Merge local branch into master and squash commits, specifying a merge commit message (-m "msg")
-		    git checkout master
-				git merge [branch] --squash -m "Message"
-		 b. (Preferred) Rebase local branch on to master
-		    git checkout [branch]
-				git rebase master
-				git checkout master
-				git merge [branch]
-	6. Fetch/rebase changes from SVN to local repo
-	7. Dcommit to push to SVN
-	8. Delete local branch
+1. Checkout master (trunk)
+2. Fetch/rebase updates from SVN
+3. Create new local branch and switch to it
+4. Make changes and commits as normal for git (git add, git commit)
+5. Merge or rebase local branch with/onto master (trunk). Either:
+	1. Merge local branch into master and squash commits, specifying a merge commit message (-m "msg")
+		* git checkout master
+		* git merge [branch] --squash -m "Message"
+	2. (Preferred) Rebase local branch on to master
+		* git checkout [branch]
+		* git rebase master
+		* git checkout master
+		* git merge [branch]
+6. Fetch/rebase changes from SVN to local repo
+7. Dcommit to push to SVN
+8. Delete local branch
