@@ -310,7 +310,7 @@ To port the SVN ignore file to gitignore:
 
 To port the SVN ignore file to git excludes:
 
-	git svn show-ignore >> .git/info/excludes
+	git svn show-ignore >> .git/info/exclude
 
 To fetch the latest changes from SVN (but not rebase):
 
