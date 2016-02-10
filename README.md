@@ -291,3 +291,65 @@ To undo a rebase:
 	oldest-ancestor = !zsh -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 	sta = "!f() { git subtree add --prefix $2 $1 master --squash; }; f"
 	stp = "!f() { git subtree pull --prefix $2 $1 master --squash; }; f"
+
+
+####Git SVN####
+
+Notes:
+
+	1. Branch tracking is permanent. i.e., local master will always track SVN trunk, etc. and cannot be changed.
+
+
+To clone an SVN repository:
+
+	git svn clone [url] -T trunk -b branches -t tags [--prefix="origin/"]
+
+To port the SVN ignore file to gitignore:
+
+	git svn show-ignore > .gitignore
+
+To port the SVN ignore file to git excludes:
+
+	git svn show-ignore >> .git/info/excludes
+
+To fetch the latest changes from SVN (but not rebase):
+
+	git svn fetch
+
+To fetch the latest changes from SVN and rebase local changes on top of latest in SVN:
+
+	git svn rebase
+
+To track an SVN branch (on the server):
+
+	git branch [branch_name] remotes/origin/[branch_name]
+
+To create a new branch on the SVN server (equivalent to "svn copy trunk branches/[newbranch]""):
+
+	git svn branch [newbranch]
+
+To push commits back to SVN:
+
+	git svn dcommit
+
+Git SVN setup:
+	1. Clone repo
+	2. Port the ignore file
+
+Git SVN workflow:
+	1. Checkout master (trunk)
+	2. Fetch/rebase updates from SVN
+	3. Create new local branch and switch to it
+	4. Make changes and commits as normal for git (git add, git commit)
+	5. Merge or rebase local branch with/onto master (trunk). Either:
+		 a. Merge local branch into master and squash commits, specifying a merge commit message (-m "msg")
+		    git checkout master
+				git merge [branch] --squash -m "Message"
+		 b. (Preferred) Rebase local branch on to master
+		    git checkout [branch]
+				git rebase master
+				git checkout master
+				git merge [branch]
+	6. Fetch/rebase changes from SVN to local repo
+	7. Dcommit to push to SVN
+	8. Delete local branch
