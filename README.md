@@ -259,16 +259,18 @@ To pull a subtree:
 
 **Note: Do not rebase commits that have been pushed to a public repo!!**
 
-To rebase the commits from newbranch into master:
+To rebase the commits in a branch onto master:
 
 	git checkout newbranch
-	git rebase master
-	git checkout master
-	git merge newbranch
+	git rebase origin/master
 
 To undo a rebase:
 
 	git reset --hard ORIG_HEAD
+
+To squash commits (where 3 is the last X number of commits to squash:
+
+	git rebase -i HEAD~3
 
 
 ####Aliases####
