@@ -1,8 +1,8 @@
 # GitCheatSheet
-##Git Cheat-Sheet For The Command Line##
+## Git Cheat-Sheet For The Command Line
 
 
-####Working With Branches####
+#### Working With Branches
 
 To list all branches:
 
@@ -41,7 +41,7 @@ To re-create a deleted branch (where sha1=last commit in the branch):
 	git checkout -b [branch name] [sha1]
 
 
-####Using Diff####
+#### Using Diff
 
 To see the differences between two branches:
 
@@ -72,7 +72,7 @@ To see the difference of a specific file between local (workspace) and fetched/r
 	git diff [branch] [remote]/[branch] -- [filepath]
 
 
-####Committing####
+#### Committing
 
 To commit all changes with a commit message:
 
@@ -104,7 +104,7 @@ To put the changes back from the stash:
 	git stash apply
 
 
-####Merging####
+#### Merging
 
 To fix a merge conflict by overwriting a file altogether:
 
@@ -123,7 +123,7 @@ To merge a branch back into master:
 	git merge newbranch
 
 
-####Viewing Commit Logs####
+#### Viewing Commit Logs
 
 To see log of abbreviated stats for each commit:
 
@@ -138,7 +138,7 @@ To see the log as an ascii graph with branch and merge history with abbreviated 
 	git log --pretty=format:"%h %s" --graph
 
 
-####Undoing Changes####
+#### Undoing Changes
 
 To unstage a file:
 
@@ -158,7 +158,7 @@ To restore everything back to the way it was prior to the last commit:
 	git reset --hard HEAD^     # use --hard if you don't care about keeping the changes you made
 
 
-####Working With Remotes####
+#### Working With Remotes
 
 To clone a repo into a custom folder:
 
@@ -210,7 +210,7 @@ To 'import' a branch from upstream into a fork:
 	git push -u [origin] [branch] # -u is optional - to update the branch tracking to the [origin] remote
 
 
-####Tags####
+#### Tags
 
 To list a tags in a repo:
 
@@ -229,7 +229,7 @@ To push a tag to the remote:
 	git push [remote] [tagname]
 
 
-####Using Submodules####
+#### Using Submodules
 
 To add an existing repo as a submodule:
 
@@ -243,7 +243,7 @@ To clone a project with submodules:
 	git submodule update
 
 
-####Using Subtree####
+#### Using Subtree
 
 To add a git subtree (and squash commits):
 
@@ -254,7 +254,7 @@ To pull a subtree:
 	git subtree pull --prefix [destination_folder] [repo_url] [branch] --squash
 
 
-####Rebasing####
+#### Rebasing
 (Apply all the changes from one branch to another)
 
 **Note: Do not rebase commits that have been pushed to a public repo!!**
@@ -273,7 +273,7 @@ To squash commits (where 3 is the last X number of commits to squash:
 	git rebase -i HEAD~3
 
 
-####Aliases####
+#### Aliases
 
 	unstage = reset HEAD --
 	undo = checkout --
@@ -295,7 +295,7 @@ To squash commits (where 3 is the last X number of commits to squash:
 	stp = "!f() { git subtree pull --prefix $2 $1 master --squash; }; f"
 
 
-####Git SVN####
+#### Git SVN
 
 Notes:
 
@@ -334,12 +334,12 @@ To push commits back to SVN:
 
 	git svn dcommit
 
-######Git SVN setup:######
+###### Git SVN setup:
 
 1. Clone repo
 2. Port the ignore file
 
-######Git SVN workflow:######
+###### Git SVN workflow:
 
 1. Checkout master (trunk)
 2. Fetch/rebase updates from SVN
