@@ -152,6 +152,10 @@ To reset all changes to all files:
 
 	git reset --hard
 
+To (recursively) delete untracked files from the working tree:
+
+	git clean
+
 To restore everything back to the way it was prior to the last commit:
 
 	git reset --soft HEAD^     # use --soft if you want to keep your changes
