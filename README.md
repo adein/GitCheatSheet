@@ -41,6 +41,7 @@ To re-create a deleted branch (where sha1=last commit in the branch):
 	git checkout -b [branch name] [sha1]
 
 To rename the current branch:
+
 	git branch -m [newname]
 
 
