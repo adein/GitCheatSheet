@@ -236,6 +236,11 @@ To push a tag to the remote:
 
 	git push [remote] [tagname]
 
+To delete a tag:
+
+	git tag -d [tag_name]
+	git push --delete origin [tag_name]
+
 
 #### Using Submodules
 
